@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Hello World | Hexo</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/8.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hello World</h1><a id="logo" href="/.">Hexo</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Hello World</h1><div class="post-meta">Jun 13, 2018</div><div class="post-content"><p>composer安装，3.配置中国镜像,常用框架Laravel,Thinkphp的安装<br>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h1 id="composer安装"><a href="#composer安装" class="headerlink" title="composer安装"></a>composer安装</h1><h3 id="1-下载composer"><a href="#1-下载composer" class="headerlink" title="1.下载composer"></a>1.下载composer</h3><blockquote>
+<p>php -r “readfile(‘<a href="https://getcomposer.org/installer&#39;);&quot;" target="_blank" rel="noopener">https://getcomposer.org/installer&#39;);&quot;</a> &gt; composer-setup.php</p>
+<p>php composer-setup.php</p>
+<p>php -r “unlink(‘composer-setup.php’);”</p>
+</blockquote>
+<p>执行第一条命令下载下来的 composer-setup.php 脚本将简单的检测 php.ini 中的参数设置，如果某些参数未正确设置则会给出警告；</p>
+<p>然后下载最新版本的 composer.phar 文件到当前目录。</p>
+<p>上述 3 条命令的作用依次是：</p>
+<p>1.下载安装脚本（composer-setup.php）到当前目录。</p>
+<p>2.执行安装过程。</p>
+<p>3.删除安装脚本 – composer-setup.php 。</p>
+<h3 id="2-全局安装"><a href="#2-全局安装" class="headerlink" title="2.全局安装"></a>2.全局安装</h3><blockquote>
+<p>cp composer.phar /usr/local/bin/composer</p>
+</blockquote>
+<h3 id="3-配置中国镜像"><a href="#3-配置中国镜像" class="headerlink" title="3.配置中国镜像"></a>3.配置中国镜像</h3><blockquote>
+<p>composer config -g repo.packagist composer <a href="https://packagist.phpcomposer.com" target="_blank" rel="noopener">https://packagist.phpcomposer.com</a></p>
+</blockquote>
+<p><em>使用中的问题</em><br>在项目中composer update组件时出现错误提示</p>
+<p>[Composer\Downloader\TransportException]</p>
+<p>Your configuration does not allow connection to <a href="http://packagist.phpcomposer.com" target="_blank" rel="noopener">http://packagist.phpcomposer.com</a>. </p>
+<p>See <a href="https://getcomposer.org/doc/06-config.md#secure-http" target="_blank" rel="noopener">https://getcomposer.org/doc/06-config.md#secure-http</a> for details。</p>
+<p>解决方法禁用https请求，改用http方式。所以我们在composer.json文件中设置一个本地或全局的composer配置config</p>
+<p>方法一：命令行<code>composer config secure-http false</code>。通过命令修改composer.json，效果等同方法二。</p>
+<p>方法二：直接改composer.json,给“config”项中加上”secure-http”: false ;</p>
+<p><code>&quot;config&quot;:{</code><br><code>&quot;vendor-dir&quot;:&quot;packages&quot;,</code><br><code>&quot;secure-http&quot;:false</code><br><code>}</code></p>
+<p>相关资料</p>
+<p><a href="http://www.kancloud.cn/thinkphp/composer/35674" target="_blank" rel="noopener">Composer中文文档</a></p>
+<p><a href="http://pkg.phpcomposer.com/" target="_blank" rel="noopener">Packagist / Composer 中国全量镜像</a></p>
+<h2 id="安装常用框架案例"><a href="#安装常用框架案例" class="headerlink" title="安装常用框架案例"></a>安装常用框架案例</h2><p>安装Laravel</p>
+<p><code>composer create-project laravel/laravel LaravelTest --prefer-dist</code></p>
+<p><code>chmod -R 777 LaravelTest/storage</code></p>
+<p><code>chmod -R 777 LaravelTest/vendor</code></p>
+<blockquote>
+<p>访问 <a href="http://ip/LaravelTest/public" target="_blank" rel="noopener">http://ip/LaravelTest/public</a></p>
+</blockquote>
+<p>安装Yii2</p>
+<blockquote>
+<p>Composer asset plugin，它是通过 Composer 管理 bower 和 npm 包所必须的，此命令全局生效，一劳永逸。</p>
+</blockquote>
+<blockquote>
+<p><code>composer self-update</code></p>
+</blockquote>
+<blockquote>
+<p><code>composer global require &quot;fxp/composer-asset-plugin:~1.0.3&quot;</code></p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>安装基础版</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><code>composer create-project --prefer-dist yiisoft/yii2-app-basic basicApp</code></p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>安装高级版</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><code>composer create-project --prefer-dist yiisoft/yii2-app-advanced yii2App</code></p>
+</blockquote>
+</blockquote>
+<p>安装ThinkPHP</p>
+<p><code>composer create-project topthink/thinkphp ThinkDemo</code></p>
+</div><div class="tags"></div><div class="post-nav"><a class="next" href="/2018/06/13/hello-world/">Hello World</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/06/13/first/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/13/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Hexo.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.3.5/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
